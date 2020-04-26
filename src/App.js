@@ -8,38 +8,21 @@ let id = 0
 
 
 function TodoItem(props) {
-  if (props.todoitem.status === 'notDone') {
-    return (
-      <tr>
-        <td>{props.todoitem.todoText}</td>
-        <td>
-      
-    
-          <span>
-            <button className='btn btn-success' onClick={props.onCompleteHandler} >Done</button>
-            <label>/</label>
-            <button className='btn btn-danger' onClick={props.onRemovehandler}>Remove</button>
-          </span>
-        </td>
-      </tr>
-    )
-
-  } else {
-    return (
-      <tr>
-        <td><del>{props.todoitem.todoText}</del></td>
-        <td>
-          <span>
-            <button className='btn btn-warning' onClick={props.onInCompleteHandler}>Not Done</button>
-            <label>/</label>
-            <button className='btn btn-danger' onClick={props.onRemovehandler}>Remove</button>
-          </span>
-        </td>
-      </tr>
-    )
-
-
-  }
+  return (
+    <tr>
+      <td>{props.todoitem.todoText}</td>
+      <td>          
+        <span>
+        { props.todoitem.status === 'notDone' 
+        ?<button className='btn btn-success' onClick={props.onCompleteHandler} >Done</button>
+        :<button className='btn btn-warning' onClick={props.onInCompleteHandler}>Not Done</button>
+        }          
+          <label>/</label>
+          <button className='btn btn-danger' onClick={props.onRemovehandler}>Remove</button>
+        </span>
+      </td>
+    </tr>
+  )
 
 }
 
@@ -134,9 +117,9 @@ class App extends React.Component {
       <div className="container">
         <h2 className="text-center">Todo List</h2>
         <TodoInputBox parentCallbackForAdd={this.addTodoItem} parentCallbackForClear={this.clearAllTodos}></TodoInputBox>
-        <CounterButton id="totalCountSpanId" buttonText="Todo Count" count={this.state.todos.length} ></CounterButton>	&nbsp;
-        <CounterButton id="openCountSpanId" buttonText="Open Todo Count" count={this.state.todos.filter(todo => todo.status === 'notDone').length}></CounterButton>	&nbsp;
-        <CounterButton id="doneCountSpanId" buttonText="Done Todo Count" count={this.state.todos.filter(todo => todo.status === 'done').length}></CounterButton>	&nbsp;
+        <CounterButton  buttonText="Todo Count" count={this.state.todos.length} ></CounterButton>	&nbsp;
+        <CounterButton buttonText="Open Todo Count" count={this.state.todos.filter(todo => todo.status === 'notDone').length}></CounterButton>	&nbsp;
+        <CounterButton  buttonText="Done Todo Count" count={this.state.todos.filter(todo => todo.status === 'done').length}></CounterButton>	&nbsp;
 
 
         <div>
