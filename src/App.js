@@ -10,7 +10,11 @@ let id = 0
 function TodoItem(props) {
   return (
     <tr>
-      <td>{props.todoitem.todoText}</td>
+     { props.todoitem.status === 'notDone' 
+        ?<td>{props.todoitem.todoText}</td>
+        : <td><del>{props.todoitem.todoText}</del></td>
+        }    
+     
       <td>          
         <span>
         { props.todoitem.status === 'notDone' 
@@ -20,6 +24,7 @@ function TodoItem(props) {
           <label>/</label>
           <button className='btn btn-danger' onClick={props.onRemovehandler}>Remove</button>
         </span>
+
       </td>
     </tr>
   )
